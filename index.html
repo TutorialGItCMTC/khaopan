@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Introduce Myself</title>
+
+    <!-- Kanit -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #050507;
+            --card: rgba(255, 255, 255, 0.055);
+            --text: #ffffff;
+            --muted: #9d9daa;
+            --primary: #8b5cf6;
+            --secondary: #c084fc;
+            --accent: #6366f1;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            overflow-x: hidden;
+            font-family: "Kanit", sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at 20% 20%, rgba(139, 92, 246, 0.12), transparent 30%),
+                radial-gradient(circle at 80% 70%, rgba(99, 102, 241, 0.10), transparent 30%),
+                var(--bg);
+        }
+
+        /* =========================
+           BACKGROUND GRID
+        ========================= */
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.22;
+
+            background-image:
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+
+            background-size: 45px 45px;
+
+            mask-image:
+                linear-gradient(
+                    to bottom,
+                    rgba(0,0,0,0.8),
+                    transparent
+                );
+        }
+
+        /* =========================
+           MOUSE GLOW
+        ========================= */
+
+        .mouse-glow {
+            position: fixed;
+            width: 450px;
+            height: 450px;
+
+            border-radius: 50%;
+            pointer-events: none;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(139, 92, 246, 0.18),
+                    rgba(139, 92, 246, 0.05) 35%,
+                    transparent 70%
+                );
+
+            transform: translate(-50%, -50%);
+
+            z-index: 0;
+            filter: blur(10px);
+        }
+
+        /* =========================
+           PARTICLES
+        ========================= */
+
+        .particles {
+            position: fixed;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+
+            width: 3px;
+            height: 3px;
+
+            border-radius: 50%;
+
+            background: #a855f7;
+
+            box-shadow:
+                0 0 8px #a855f7,
+                0 0 16px rgba(168,85,247,.8);
+
+            opacity: 0;
+
+            animation:
+                particleMove linear infinite;
+        }
+
+        @keyframes particleMove {
+            0% {
+                opacity: 0;
+                transform: translateY(100vh) scale(0);
+            }
+
+            15% {
+                opacity: 0.8;
+            }
+
+            85% {
+                opacity: 0.5;
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-20vh) scale(1.4);
+            }
+        }
+
+        /* =========================
+           CONTAINER
+        ========================= */
+
+        .page {
+            position: relative;
+            z-index: 2;
+
+            width: 100%;
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 40px 20px;
+        }
+
+        .hero {
+            width: min(1150px, 100%);
+
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+
+            gap: 70px;
+            align-items: center;
+        }
+
+        /* =========================
+           LEFT CONTENT
+        ========================= */
+
+        .hello {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+
+            padding: 8px 14px;
+
+            border-radius: 100px;
+
+            background: rgba(139, 92, 246, 0.08);
+            border: 1px solid rgba(168, 85, 247, 0.25);
+
+            color: #d8b4fe;
+
+            font-size: 14px;
+
+            opacity: 0;
+            transform: translateY(20px);
+
+            animation: fadeUp .8s ease forwards;
+        }
+
+        .hello .dot {
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: #a855f7;
+
+            box-shadow:
+                0 0 10px #a855f7,
+                0 0 20px #a855f7;
+
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.25;
+            }
+        }
+
+        h1 {
+            margin-top: 25px;
+
+            font-size: clamp(52px, 7vw, 95px);
+            line-height: .96;
+
+            font-weight: 800;
+            letter-spacing: -3px;
+
+            opacity: 0;
+            transform: translateY(30px);
+
+            animation:
+                fadeUp .9s .15s ease forwards;
+        }
+
+        h1 .gradient {
+            display: inline-block;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #ffffff,
+                    #d8b4fe,
+                    #8b5cf6,
+                    #ffffff
+                );
+
+            background-size: 250% auto;
+
+            -webkit-background-clip: text;
+            background-clip: text;
+
+            color: transparent;
+
+            animation:
+                gradientMove 4s linear infinite;
+        }
+
+        @keyframes gradientMove {
+            to {
+                background-position: 250% center;
+            }
+        }
+
+        .typing-wrapper {
+            margin-top: 18px;
+
+            min-height: 40px;
+
+            font-size: clamp(20px, 2vw, 29px);
+            font-weight: 500;
+
+            color: #c4b5fd;
+
+            opacity: 0;
+            transform: translateY(20px);
+
+            animation:
+                fadeUp .9s .3s ease forwards;
+        }
+
+        #typing {
+            position: relative;
+        }
+
+        #typing::after {
+            content: "";
+
+            display: inline-block;
+
+            width: 2px;
+            height: 25px;
+
+            margin-left: 5px;
+
+            background: #a855f7;
+
+            vertical-align: -3px;
+
+            animation:
+                cursorBlink .7s infinite;
+        }
+
+        @keyframes cursorBlink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        .description {
+            max-width: 670px;
+
+            margin-top: 25px;
+
+            color: var(--muted);
+
+            line-height: 1.9;
+
+            font-size: 16px;
+            font-weight: 300;
+
+            opacity: 0;
+            transform: translateY(20px);
+
+            animation:
+                fadeUp .9s .45s ease forwards;
+        }
+
+        /* =========================
+           SKILLS
+        ========================= */
+
+        .skills {
+            display: flex;
+            gap: 9px;
+            flex-wrap: wrap;
+
+            margin-top: 30px;
+
+            opacity: 0;
+            transform: translateY(20px);
+
+            animation:
+                fadeUp .9s .6s ease forwards;
+        }
+
+        .skill {
+            padding: 7px 14px;
+
+            border-radius: 9px;
+
+            background: rgba(255,255,255,.035);
+
+            border:
+                1px solid rgba(255,255,255,.08);
+
+            color: #d4d4dc;
+
+            font-size: 13px;
+
+            transition:
+                .25s ease;
+        }
+
+        .skill:hover {
+            transform: translateY(-3px);
+
+            color: #ffffff;
+
+            border-color:
+                rgba(168,85,247,.5);
+
+            background:
+                rgba(139,92,246,.1);
+
+            box-shadow:
+                0 8px 30px rgba(139,92,246,.12);
+        }
+
+        /* =========================
+           BUTTONS
+        ========================= */
+
+        .buttons {
+            margin-top: 35px;
+
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+
+            opacity: 0;
+            transform: translateY(20px);
+
+            animation:
+                fadeUp .9s .75s ease forwards;
+        }
+
+        .btn {
+            position: relative;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+
+            padding: 12px 22px;
+
+            border-radius: 12px;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            overflow: hidden;
+
+            transition:
+                transform .25s ease,
+                box-shadow .25s ease,
+                background .25s ease;
+        }
+
+        .btn-primary {
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #7c3aed,
+                    #9333ea
+                );
+
+            box-shadow:
+                0 12px 35px rgba(124,58,237,.22);
+        }
+
+        .btn-primary::after {
+            content: "";
+
+            position: absolute;
+            top: 0;
+            left: -120%;
+
+            width: 60%;
+            height: 100%;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(255,255,255,.3),
+                    transparent
+                );
+
+            transform: skewX(-20deg);
+
+            transition:
+                .7s;
+        }
+
+        .btn-primary:hover::after {
+            left: 150%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 18px 45px rgba(124,58,237,.35);
+        }
+
+        .btn-secondary {
+            color: #ddd;
+
+            border:
+                1px solid rgba(255,255,255,.1);
+
+            background:
+                rgba(255,255,255,.04);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-4px);
+
+            background:
+                rgba(255,255,255,.075);
+        }
+
+        /* =========================
+           PROFILE CARD
+        ========================= */
+
+        .profile-container {
+            position: relative;
+
+            display: flex;
+            justify-content: center;
+
+            opacity: 0;
+            transform: translateX(30px);
+
+            animation:
+                profileIn 1s .4s ease forwards;
+        }
+
+        @keyframes profileIn {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .profile-card {
+            position: relative;
+
+            width: min(360px, 90vw);
+            aspect-ratio: 4 / 5;
+
+            padding: 12px;
+
+            border-radius: 30px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,.11),
+                    rgba(255,255,255,.025)
+                );
+
+            border:
+                1px solid rgba(255,255,255,.1);
+
+            backdrop-filter:
+                blur(20px);
+
+            box-shadow:
+                0 30px 80px rgba(0,0,0,.45);
+
+            transition:
+                transform .15s ease;
+
+            transform-style:
+                preserve-3d;
+        }
+
+        .profile-card::before {
+            content: "";
+
+            position: absolute;
+            inset: -2px;
+
+            border-radius: inherit;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(168,85,247,.7),
+                    transparent 35%,
+                    transparent 65%,
+                    rgba(99,102,241,.6)
+                );
+
+            z-index: -1;
+
+            filter: blur(7px);
+
+            opacity: .55;
+        }
+
+        .profile-image {
+            position: relative;
+
+            width: 100%;
+            height: 100%;
+
+            overflow: hidden;
+
+            border-radius: 22px;
+
+            background:
+                linear-gradient(
+                    160deg,
+                    #18181b,
+                    #09090b
+                );
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* เปลี่ยนรูปตรงนี้ */
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+
+            filter:
+                saturate(.85)
+                contrast(1.05);
+        }
+
+        .profile-overlay {
+            position: absolute;
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    to top,
+                    rgba(5,5,7,.95),
+                    transparent 55%
+                );
+        }
+
+        .profile-info {
+            position: absolute;
+            left: 28px;
+            right: 28px;
+            bottom: 28px;
+
+            transform:
+                translateZ(40px);
+        }
+
+        .profile-info .status {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+
+            color: #d8b4fe;
+
+            font-size: 12px;
+
+            margin-bottom: 5px;
+        }
+
+        .profile-info h2 {
+            font-size: 31px;
+
+            font-weight: 600;
+        }
+
+        .profile-info p {
+            margin-top: 2px;
+
+            color: #aaaab5;
+            font-size: 13px;
+        }
+
+        /* =========================
+           FLOATING ORBS
+        ========================= */
+
+        .orb {
+            position: absolute;
+
+            border-radius: 50%;
+
+            filter: blur(1px);
+
+            animation:
+                float 5s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 85px;
+            height: 85px;
+
+            top: -25px;
+            right: -20px;
+
+            background:
+                rgba(139,92,246,.17);
+
+            border:
+                1px solid rgba(168,85,247,.25);
+
+            backdrop-filter:
+                blur(8px);
+        }
+
+        .orb-2 {
+            width: 45px;
+            height: 45px;
+
+            bottom: 30px;
+            left: -28px;
+
+            background:
+                rgba(99,102,241,.15);
+
+            border:
+                1px solid rgba(99,102,241,.25);
+
+            animation-delay:
+                -2s;
+        }
+
+        @keyframes float {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* =========================
+           SCROLL INDICATOR
+        ========================= */
+
+        .scroll {
+            position: absolute;
+
+            bottom: 25px;
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+
+            color: #666;
+
+            font-size: 10px;
+            letter-spacing: 2px;
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 45px;
+
+            background:
+                linear-gradient(
+                    to bottom,
+                    #8b5cf6,
+                    transparent
+                );
+
+            animation:
+                scrollLine 2s infinite;
+        }
+
+        @keyframes scrollLine {
+            0% {
+                transform: scaleY(0);
+                transform-origin: top;
+            }
+
+            50% {
+                transform: scaleY(1);
+                transform-origin: top;
+            }
+
+            51% {
+                transform-origin: bottom;
+            }
+
+            100% {
+                transform: scaleY(0);
+                transform-origin: bottom;
+            }
+        }
+
+        /* =========================
+           GENERAL ANIMATIONS
+        ========================= */
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 850px) {
+
+            .hero {
+                grid-template-columns: 1fr;
+
+                text-align: center;
+
+                gap: 55px;
+            }
+
+            .description {
+                margin-inline: auto;
+            }
+
+            .skills,
+            .buttons {
+                justify-content: center;
+            }
+
+            .hello {
+                margin-inline: auto;
+            }
+
+            h1 {
+                letter-spacing: -2px;
+            }
+
+            .profile-container {
+                order: -1;
+            }
+
+            .profile-card {
+                width: min(300px, 85vw);
+            }
+
+            .scroll {
+                display: none;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .page {
+                padding-top: 55px;
+                padding-bottom: 55px;
+            }
+
+            h1 {
+                font-size: 54px;
+            }
+
+            .description {
+                font-size: 14px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="mouse-glow" id="mouseGlow"></div>
+
+    <div class="particles" id="particles"></div>
+
+    <main class="page">
+
+        <section class="hero">
+
+            <!-- LEFT -->
+            <div class="content">
+
+                <div class="hello">
+                    <span class="dot"></span>
+                    AVAILABLE FOR SOMETHING AWESOME
+                </div>
+
+                <h1>
+                    Hi, I'm
+                    <br>
+                    <span class="gradient">WHITE.</span>
+                </h1>
+
+                <div class="typing-wrapper">
+                    <span id="typing"></span>
+                </div>
+
+                <p class="description">
+                    ผมชอบสร้างสิ่งใหม่ ๆ ผ่านโค้ดและไอเดีย
+                    สนุกกับการออกแบบระบบ พัฒนาเว็บไซต์
+                    และเปลี่ยนไอเดียในหัวให้กลายเป็นของที่ใช้งานได้จริง
+                    เพราะสำหรับผม Code ไม่ใช่แค่ตัวอักษร
+                    แต่มันคือเครื่องมือสำหรับสร้างโลกที่เราจินตนาการไว้
+                </p>
+
+                <div class="skills">
+                    <span class="skill">HTML</span>
+                    <span class="skill">CSS</span>
+                    <span class="skill">JavaScript</span>
+                    <span class="skill">TypeScript</span>
+                    <span class="skill">React</span>
+                    <span class="skill">Node.js</span>
+                    <span class="skill">Lua</span>
+                    <span class="skill">FiveM</span>
+                </div>
+
+                <div class="buttons">
+
+                    <a href="#" class="btn btn-primary">
+                        VIEW MY WORK
+                        <span>↗</span>
+                    </a>
+
+                    <a href="#" class="btn btn-secondary">
+                        CONTACT ME
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- RIGHT -->
+            <div class="profile-container">
+
+                <div class="orb orb-1"></div>
+                <div class="orb orb-2"></div>
+
+                <div class="profile-card" id="profileCard">
+
+                    <div class="profile-image">
+
+                        <!--
+                            เปลี่ยน src เป็นรูปมึง เช่น
+                            src="profile.jpg"
+                        -->
+
+                        <img
+                            src="https://avatars.githubusercontent.com/u/71384546?s=400&u=e8689f4a4c0fde0beafac1ccf036c938310e3a29&v=4"
+                            alt="Profile"
+                        >
+
+                        <div class="profile-overlay"></div>
+
+                    </div>
+
+                    <div class="profile-info">
+
+                        <div class="status">
+                            <span class="dot">●</span>
+                            ONLINE
+                        </div>
+
+                        <h2>WHITE</h2>
+
+                        <p>
+                            Developer • Designer • Creator
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <div class="scroll">
+
+            SCROLL
+
+            <div class="scroll-line"></div>
+
+        </div>
+
+    </main>
+
+
+    <script>
+
+        /* =========================
+           TYPING EFFECT
+        ========================= */
+
+        const typingElement =
+            document.getElementById("typing");
+
+        const words = [
+            "Creative Developer",
+            "Web Developer",
+            "FiveM Developer",
+            "UI / UX Enthusiast",
+            "Turning ideas into reality."
+        ];
+
+        let wordIndex = 0;
+        let charIndex = 0;
+
+        let deleting = false;
+
+        function typingEffect() {
+
+            const currentWord =
+                words[wordIndex];
+
+            if (!deleting) {
+
+                typingElement.textContent =
+                    currentWord.substring(
+                        0,
+                        charIndex + 1
+                    );
+
+                charIndex++;
+
+                if (
+                    charIndex ===
+                    currentWord.length
+                ) {
+
+                    deleting = true;
+
+                    setTimeout(
+                        typingEffect,
+                        1500
+                    );
+
+                    return;
+                }
+
+            } else {
+
+                typingElement.textContent =
+                    currentWord.substring(
+                        0,
+                        charIndex - 1
+                    );
+
+                charIndex--;
+
+                if (charIndex === 0) {
+
+                    deleting = false;
+
+                    wordIndex =
+                        (wordIndex + 1) %
+                        words.length;
+                }
+
+            }
+
+            const speed =
+                deleting
+                ? 35
+                : 70;
+
+            setTimeout(
+                typingEffect,
+                speed
+            );
+
+        }
+
+        typingEffect();
+
+
+        /* =========================
+           MOUSE GLOW
+        ========================= */
+
+        const glow =
+            document.getElementById("mouseGlow");
+
+        let mouseX = 0;
+        let mouseY = 0;
+
+        let glowX = 0;
+        let glowY = 0;
+
+        document.addEventListener(
+            "mousemove",
+            (event) => {
+
+                mouseX = event.clientX;
+                mouseY = event.clientY;
+
+            }
+        );
+
+        function glowAnimation() {
+
+            glowX +=
+                (mouseX - glowX) * .08;
+
+            glowY +=
+                (mouseY - glowY) * .08;
+
+            glow.style.left =
+                glowX + "px";
+
+            glow.style.top =
+                glowY + "px";
+
+            requestAnimationFrame(
+                glowAnimation
+            );
+
+        }
+
+        glowAnimation();
+
+
+        /* =========================
+           PARTICLES
+        ========================= */
+
+        const particlesContainer =
+            document.getElementById(
+                "particles"
+            );
+
+        const particleAmount = 35;
+
+        for (
+            let i = 0;
+            i < particleAmount;
+            i++
+        ) {
+
+            const particle =
+                document.createElement(
+                    "div"
+                );
+
+            particle.classList.add(
+                "particle"
+            );
+
+            const size =
+                Math.random() * 3 + 1;
+
+            particle.style.width =
+                size + "px";
+
+            particle.style.height =
+                size + "px";
+
+            particle.style.left =
+                Math.random() *
+                100 +
+                "%";
+
+            particle.style.animationDuration =
+                Math.random() *
+                10 +
+                8 +
+                "s";
+
+            particle.style.animationDelay =
+                Math.random() *
+                10 +
+                "s";
+
+            particlesContainer.appendChild(
+                particle
+            );
+
+        }
+
+
+        /* =========================
+           PROFILE CARD 3D EFFECT
+        ========================= */
+
+        const card =
+            document.getElementById(
+                "profileCard"
+            );
+
+        card.addEventListener(
+            "mousemove",
+            (event) => {
+
+                const rect =
+                    card.getBoundingClientRect();
+
+                const x =
+                    event.clientX -
+                    rect.left;
+
+                const y =
+                    event.clientY -
+                    rect.top;
+
+                const centerX =
+                    rect.width / 2;
+
+                const centerY =
+                    rect.height / 2;
+
+                const rotateX =
+                    ((y - centerY) /
+                        centerY) *
+                    -7;
+
+                const rotateY =
+                    ((x - centerX) /
+                        centerX) *
+                    7;
+
+                card.style.transform =
+                    `
+                    perspective(900px)
+                    rotateX(${rotateX}deg)
+                    rotateY(${rotateY}deg)
+                    scale(1.02)
+                    `;
+
+            }
+        );
+
+        card.addEventListener(
+            "mouseleave",
+            () => {
+
+                card.style.transform =
+                    `
+                    perspective(900px)
+                    rotateX(0deg)
+                    rotateY(0deg)
+                    scale(1)
+                    `;
+
+            }
+        );
+
+    </script>
+
+</body>
+</html>
